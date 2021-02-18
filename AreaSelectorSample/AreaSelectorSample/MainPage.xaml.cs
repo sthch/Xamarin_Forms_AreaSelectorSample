@@ -1,11 +1,11 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using Xamarin.Forms;
 
 namespace AreaSelectorSample
@@ -35,6 +35,8 @@ namespace AreaSelectorSample
             _cityList = JsonConvert.DeserializeObject<List<AreaModel>>(result[1].ToString());
             _areaList = JsonConvert.DeserializeObject<List<AreaModel>>(result[2].ToString());
             Picker.ItemsSource = _provinceList;
+            Picker2.ItemsSource = _cityList.Where(x => x.Id.StartsWith(_provinceList[0].Id.Remove(2))).ToList();
+            Label.Text = _provinceList[0].Fullname + "-" + _cityList.FirstOrDefault(x => x.Id.StartsWith(_provinceList[0].Id.Remove(2))).Fullname;
         }
 
         private void Picker_OnSelectedIndexChanged(object sender, EventArgs e)
@@ -60,7 +62,16 @@ namespace AreaSelectorSample
                 {
                     Picker3.SelectedIndex = 0;
                 }
+                else
+                {
+                    Label.Text = Picker.SelectedItem + "-" + picker.SelectedItem;
+                }
             }
+        }
+
+        private void Picker3_OnSelectedIndexChanged(object sender, EventArgs e)
+        {
+            Label.Text = Picker.SelectedItem + "-" + Picker2.SelectedItem + "-" + ((Picker)sender).SelectedItem;
         }
     }
 }

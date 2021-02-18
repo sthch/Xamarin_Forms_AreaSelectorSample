@@ -4,6 +4,10 @@
              x:Class="AreaSelectorSample.MainPage">
 
     <Grid VerticalOptions="Center">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
             <ColumnDefinition />
@@ -15,8 +19,9 @@
             </Style>
         </Grid.Resources>
         <Picker x:Name="Picker" SelectedIndexChanged="Picker_OnSelectedIndexChanged" />
-        <Picker Grid.Column="1" x:Name="Picker2" SelectedIndexChanged="Picker2_OnSelectedIndexChanged" />
-        <Picker Grid.Column="2" x:Name="Picker3" />
+        <Picker Grid.Row="0" Grid.Column="1" x:Name="Picker2" SelectedIndexChanged="Picker2_OnSelectedIndexChanged" />
+        <Picker Grid.Row="0" Grid.Column="2" x:Name="Picker3" SelectedIndexChanged="Picker3_OnSelectedIndexChanged" />
+        <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" x:Name="Label" HorizontalOptions="Center" />
     </Grid>
 
 </ContentPage>
