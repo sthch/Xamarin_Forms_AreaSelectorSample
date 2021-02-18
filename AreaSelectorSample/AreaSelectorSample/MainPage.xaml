@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AreaSelectorSample.MainPage">
+
+    <Grid VerticalOptions="Center">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.Resources>
+            <Style TargetType="Picker">
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+            </Style>
+        </Grid.Resources>
+        <Picker x:Name="Picker" SelectedIndexChanged="Picker_OnSelectedIndexChanged" />
+        <Picker Grid.Column="1" x:Name="Picker2" SelectedIndexChanged="Picker2_OnSelectedIndexChanged" />
+        <Picker Grid.Column="2" x:Name="Picker3" />
+    </Grid>
+
+</ContentPage>
