@@ -36,7 +36,7 @@ namespace AreaSelectorSample
             _areaList = JsonConvert.DeserializeObject<List<AreaModel>>(result[2].ToString());
             Picker.ItemsSource = _provinceList;
             Picker2.ItemsSource = _cityList.Where(x => x.Id.StartsWith(_provinceList[0].Id.Remove(2))).ToList();
-            Label.Text = _provinceList[0].Fullname + "-" + _cityList.FirstOrDefault(x => x.Id.StartsWith(_provinceList[0].Id.Remove(2))).Fullname;
+            Picker.SelectedIndex = 0;
         }
 
         private void Picker_OnSelectedIndexChanged(object sender, EventArgs e)
