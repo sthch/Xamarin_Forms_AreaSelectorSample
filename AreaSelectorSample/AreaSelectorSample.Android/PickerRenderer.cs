@@ -1,4 +1,5 @@
 ﻿using Android.Content;
+using Android.Views;
 using Android.Widget;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -36,6 +37,7 @@ namespace AreaSelectorSample.Droid
                 UpdateItemsSource();
                 UpdateSelectedIndex();
             }
+            Control.DescendantFocusability = DescendantFocusability.BlockDescendants;
             Control.WrapSelectorWheel = false;
         }
 
