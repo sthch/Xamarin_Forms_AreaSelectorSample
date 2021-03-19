@@ -9,7 +9,7 @@
 
 # 已知问题
 1. 当没有数据的时候，Picker会显示一个默认值0
-2. Picker在Android端的夜间模式（黑色背景）下，无法正常显示（可读性极差）
+2. ~~Picker在Android端的夜间模式（黑色背景）下，无法正常显示（可读性极差）~~（可通过设定TextColor属性来改善可读性）
 
 # 致谢
 PickerRenderer中的代码参考自amay077的Xamarin_Forms_PickerViewSample
