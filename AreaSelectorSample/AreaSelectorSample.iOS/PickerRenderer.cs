@@ -6,6 +6,7 @@ using System.Drawing;
 using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
+using Color = Xamarin.Forms.Color;
 using PickerRenderer = AreaSelectorSample.iOS.PickerRenderer;
 
 [assembly: ExportRenderer(typeof(Picker), typeof(PickerRenderer))]
@@ -30,7 +31,7 @@ namespace AreaSelectorSample.iOS
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             base.OnElementPropertyChanged(sender, e);
-            if (e.PropertyName == Picker.ItemsSourceProperty.PropertyName)
+            if (e.PropertyName == Picker.ItemsSourceProperty.PropertyName || e.PropertyName == Picker.TextColorProperty.PropertyName)
             {
                 UpdateItemsSource();
             }
@@ -42,10 +43,7 @@ namespace AreaSelectorSample.iOS
 
         private void UpdateItemsSource()
         {
-            Control.Model = new MyDataModel(Element.ItemsSource, row =>
-            {
-                Element.SelectedIndex = row;
-            });
+            Control.Model = new MyDataModel(Element.ItemsSource, row => Element.SelectedIndex = row, Element.TextColor.ToUIColor());
         }
 
         private void UpdateSelectedIndex()
@@ -67,7 +65,9 @@ namespace AreaSelectorSample.iOS
 
         private readonly Action<int> _selectedHandler;
 
-        public MyDataModel(IEnumerable items, Action<int> selectedHandler)
+        public UIColor TextColor { get; set; }
+
+        public MyDataModel(IEnumerable items, Action<int> selectedHandler, UIColor textColor)
         {
             _selectedHandler = selectedHandler;
 
@@ -77,6 +77,10 @@ namespace AreaSelectorSample.iOS
                 {
                     _list.Add(item.ToString());
                 }
+            }
+            if (!textColor.Equals(Color.Default.ToUIColor()))
+            {
+                TextColor = textColor;
             }
         }
 
@@ -102,6 +106,10 @@ namespace AreaSelectorSample.iOS
                 Text = _list[(int)row],
                 TextAlignment = UITextAlignment.Center
             };
+            if (TextColor != null)
+            {
+                label.TextColor = TextColor;
+            }
             return label;
         }
 

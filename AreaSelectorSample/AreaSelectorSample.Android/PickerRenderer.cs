@@ -39,6 +39,10 @@ namespace AreaSelectorSample.Droid
             }
             Control.DescendantFocusability = DescendantFocusability.BlockDescendants;
             Control.WrapSelectorWheel = false;
+            if (Element.TextColor != Color.Default)
+            {
+                Control.SetTextColor(Element.TextColor.ToAndroid());
+            }
         }
 
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -51,6 +55,10 @@ namespace AreaSelectorSample.Droid
             else if (e.PropertyName == Picker.SelectedIndexProperty.PropertyName)
             {
                 UpdateSelectedIndex();
+            }
+            else if (e.PropertyName == Picker.TextColorProperty.PropertyName)
+            {
+                Control.SetTextColor(Element.TextColor.ToAndroid());
             }
         }
 
